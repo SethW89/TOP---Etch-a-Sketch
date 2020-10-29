@@ -8,8 +8,16 @@ function createGrid(rows, cols) {
     // For each cell we need to create it and give it the appropriate initial style
     for (let i = 0; i < rows * cols; i++) {
         let cell = document.createElement('div');
+        // Add an event listener to the cell. When the mouse is over it it should change color.
+        cell.addEventListener("mouseenter", colorCell);
+        //cell.style['backgroundColor'] = 'white';
         canvas.appendChild(cell).className = 'cell';
     }
 
 }
-createGrid(16, 16);
+function colorCell(e) {
+    console.log('ChangeCellCOlor!');
+    // Note: target identifies only this unique cell, not them all. 
+    e.target.style['background-color'] = 'black';
+}
+createGrid(4, 4);
