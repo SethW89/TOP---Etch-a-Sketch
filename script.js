@@ -12,7 +12,6 @@ function createGrid(rows, cols) {
         // Add an event listener to the cell. When the mouse is over it it should change color.
         cell.addEventListener("mouseenter", colorCell);
         cell.addEventListener("touchstart", colorCell);
-        //cell.style['backgroundColor'] = 'white';
         canvas.appendChild(cell).className = 'cell';
     }
 
@@ -22,6 +21,7 @@ function colorCell(e) {
     // Set cell background color to black. 
     // e.target.style.backgroundColor = "black" also works
     if (randomColors) {
+        // Provide a random RGB value.
         e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},
         ${Math.floor(Math.random() * 256)},
         ${Math.floor(Math.random() * 256)}`
@@ -44,6 +44,8 @@ function clearGrid() {
         // could use 
         // cells.style['background-color'] = 'white';
         cells.style.backgroundColor = "white";
+        // I should use RGBA for shade, but it's significantly more work.
+        cells.style.opacity = "1.1";
     })
 }
 
@@ -57,12 +59,14 @@ document.getElementById("choseGridSize").addEventListener('click', (e) => {
         return null;
     }
     createGrid(size, size);
+    clearGrid();
 });
 document.getElementById("randomColors").addEventListener('click', e => {
-
+    clearGrid();
     randomColors ? randomColors = false : randomColors = true;
 })
 document.getElementById("shade").addEventListener('click', e => {
+    clearGrid();
     shade ? shade = false : shade = true;
 })
 
@@ -71,12 +75,11 @@ function choseShade(e) {
     e.target.style.backgroundColor = "black";
     // grab current opacity
     let currOpacity = e.target.style.opacity;
-    console.log(currOpacity);
-    if (currOpacity == null || currOpacity == 0) {
+    if (currOpacity > 1) {
         e.target.style.opacity = 0.2;
         return null;
     }
-    else {
+    else if (currOpacity < 1) {
         e.target.style.opacity = (parseFloat(currOpacity) + 0.2);
     }
 
