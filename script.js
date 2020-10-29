@@ -10,6 +10,7 @@ function createGrid(rows, cols) {
         let cell = document.createElement('div');
         // Add an event listener to the cell. When the mouse is over it it should change color.
         cell.addEventListener("mouseenter", colorCell);
+        cell.addEventListener("touchstart", colorCell);
         //cell.style['backgroundColor'] = 'white';
         canvas.appendChild(cell).className = 'cell';
     }
@@ -20,4 +21,4 @@ function colorCell(e) {
     // Note: target identifies only this unique cell, not them all. 
     e.target.style['background-color'] = 'black';
 }
-createGrid(4, 4);
+createGrid(16, 16);
