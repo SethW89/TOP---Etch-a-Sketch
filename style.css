@@ -17,4 +17,5 @@ body {
     background-color:white;
     border: 1px solid lightgrey;
     margin: -1px -1px -1px -1px;
+    opacity: 1;
 }

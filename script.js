@@ -1,5 +1,6 @@
 const canvas = document.getElementById('canvas');
 let randomColors = false;
+let shade = false;
 // Make grid with dynamic size
 function createGrid(rows, cols) {
     // Overwrite the CSS style to fit new grid
@@ -24,9 +25,13 @@ function colorCell(e) {
         e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},
         ${Math.floor(Math.random() * 256)},
         ${Math.floor(Math.random() * 256)}`
-        return null;
     }
-    e.target.style['background-color'] = 'black';
+    else if (shade) {
+        // We will edit a of RGBA(). 
+        choseShade(e);
+    } else {
+        e.target.style['background-color'] = 'black';
+    }
 }
 createGrid(16, 16);
 
@@ -54,5 +59,25 @@ document.getElementById("choseGridSize").addEventListener('click', (e) => {
     createGrid(size, size);
 });
 document.getElementById("randomColors").addEventListener('click', e => {
-    randomColors = true;
+
+    randomColors ? randomColors = false : randomColors = true;
 })
+document.getElementById("shade").addEventListener('click', e => {
+    shade ? shade = false : shade = true;
+})
+
+function choseShade(e) {
+    // Set color to black
+    e.target.style.backgroundColor = "black";
+    // grab current opacity
+    let currOpacity = e.target.style.opacity;
+    console.log(currOpacity);
+    if (currOpacity == null || currOpacity == 0) {
+        e.target.style.opacity = 0.2;
+        return null;
+    }
+    else {
+        e.target.style.opacity = (parseFloat(currOpacity) + 0.2);
+    }
+
+}
