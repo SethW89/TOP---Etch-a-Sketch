@@ -63,10 +63,12 @@ document.getElementById("choseGridSize").addEventListener('click', (e) => {
 });
 document.getElementById("randomColors").addEventListener('click', e => {
     clearGrid();
+    shade = false;
     randomColors ? randomColors = false : randomColors = true;
 })
 document.getElementById("shade").addEventListener('click', e => {
     clearGrid();
+    randomColors = false;
     shade ? shade = false : shade = true;
 })
 
